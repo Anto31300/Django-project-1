@@ -1,0 +1,48 @@
+<h1>List</h1>
+
+{% include 'set.html' %}
+
+{% for movie in recent_movie %}
+<p>{{movie.Title}}</p>
+{% endfor %}
+
+<h1>List of movies</h1> 
+<h3>{{visits}} time visited</h3>
+<table style="width: 100%; border: 1px solid black;" >
+  <tr>
+    <th style="padding: 15px;">Title</th>
+    <th style="padding: 15px;">Images</th>
+    <th style="padding: 15px;">Genre</th>
+    <th style="padding: 15px;">Year</th>
+    <th style="padding: 15px;">edit/delete</th>
+  </tr>
+  
+  {% for movie in movies %}
+  <tr>
+    <td>
+      {{ movie.Title }}
+    </td>
+    <td>
+      {% if movie.img %}
+      <img height="50px" width="50px" src="{{ movie.img.url }}" alt="Movie Image">
+      {% endif %}
+    </td>
+    
+    <td>
+      <h3>{{ movie.Summary|default:'Not available' }}</h3>
+    </td>
+    
+    <td>
+      <p>{{ movie.Year }}</p>
+    </td>
+    <td>
+      <p>
+        <a href="{% url 'edit' movie.id %}">Edit</a> |
+        <a href="{% url 'delete_movie' movie.id %}">Delete</a>
+      </p>
+    </td>
+  </tr>  
+  {% endfor %}
+  
+</table>
+
